@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #08080a;
+    background-image: 
+      linear-gradient(rgba(255, 183, 0, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 107, 0, 0.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+    @apply text-slate-100 font-sans antialiased;
+  }
+
+  * {
+    @apply box-border;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #09090b;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #27272a;
+    @apply rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #52525b;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-600 hover:bg-primary-500 text-white font-semibold px-5 py-2.5 rounded-lg 
+           transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 
+           focus:ring-offset-2 focus:ring-offset-black disabled:opacity-50 disabled:cursor-not-allowed
+           active:scale-95 shadow-lg shadow-primary-900/30;
+  }
+
+  .btn-secondary {
+    @apply bg-zinc-800 hover:bg-zinc-700 text-white font-semibold px-5 py-2.5 rounded-lg 
+           transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-zinc-600 
+           active:scale-95;
+  }
+
+  .btn-outline {
+    @apply border border-primary-500/30 text-primary-400 hover:bg-primary-500/10 font-semibold 
+           px-5 py-2.5 rounded-lg transition-all duration-200 active:scale-95;
+  }
+
+  .card {
+    background: rgba(20, 16, 12, 0.5);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    @apply rounded-xl p-6 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply card cursor-pointer;
+  }
+  .card-hover:hover {
+    background: rgba(18, 18, 22, 0.6);
+    border-color: rgba(255, 107, 0, 0.35);
+    @apply -translate-y-1;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 15px rgba(255, 107, 0, 0.2);
+  }
+
+  .input {
+    background-color: #050506;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    @apply w-full text-slate-100 rounded-lg px-4 py-2.5 outline-none transition-all duration-300 placeholder-slate-600;
+  }
+  .input:focus {
+    border-color: #ffb700;
+    box-shadow: 0 0 10px rgba(255, 183, 0, 0.2);
+  }
+
+  .label {
+    @apply block text-sm font-medium text-slate-300 mb-1.5;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold;
+  }
+
+  .badge-patent { @apply badge bg-amber-950/45 text-amber-300 border border-amber-800/30; }
+  .badge-copyright { @apply badge bg-orange-950/45 text-orange-300 border border-orange-800/30; }
+  .badge-trademark { @apply badge bg-yellow-950/45 text-yellow-300 border border-yellow-800/30; }
+  .badge-industrial-design { @apply badge bg-orange-950/45 text-orange-200 border border-orange-800/20; }
+  .badge-general { @apply badge bg-zinc-800/55 text-zinc-300 border border-zinc-700/30; }
+
+  .page-title {
+    @apply text-3xl font-bold text-white mb-1;
+  }
+
+  .page-subtitle {
+    @apply text-slate-400 mb-8;
+  }
+
+  .section-title {
+    @apply text-xl font-semibold text-white mb-4;
+  }
+
+  .glass-card {
+    background: rgba(20, 16, 12, 0.5);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    border-radius: 12px;
+  }
+
+  .glass-panel {
+    background: rgba(20, 16, 12, 0.5);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    border-radius: 8px;
+  }
+
+  .blueprint-corner {
+    position: absolute;
+    font-family: monospace;
+    font-size: 10px;
+    opacity: 0.5;
+    color: #ffb700;
+  }
+  .corner-tl { top: 4px; left: 4px; }
+  .corner-tr { top: 4px; right: 4px; }
+  .corner-bl { bottom: 4px; left: 4px; }
+  .corner-br { bottom: 4px; right: 4px; }
+
+  .progress-bar {
+    @apply h-2 bg-white/5 rounded-full overflow-hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, #ff6b00, #ffb700);
+    @apply rounded-full transition-all duration-500;
+  }
+
+  .nav-link {
+    @apply flex items-center gap-2.5 px-3 py-2 rounded-lg text-slate-400 hover:text-white 
+           hover:bg-white/5 transition-all duration-150 font-medium text-sm;
+  }
+
+  .nav-link-active {
+    @apply nav-link text-white bg-white/5 border-l-2 border-primary-500;
+  }
+
+  .stat-card {
+    @apply card flex items-center gap-4;
+  }
+  
+  .scanline-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .scanline-beam {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, #ff6b00 50%, transparent);
+    opacity: 0.35;
+    pointer-events: none;
+    animation: scanline 7s linear infinite;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(to right, #ffd280, #ffb700, #ff6b00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
