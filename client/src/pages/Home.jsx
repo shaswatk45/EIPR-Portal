@@ -7,21 +7,27 @@ import {
   LightBulbIcon,
   ArrowRightIcon,
 } from '@heroicons/react/24/outline';
+import FlowArt, { FlowSection } from '../components/ui/story-scroll.jsx';
+
+const iprTypes = [
+  { name: 'Patent', desc: 'Protect structural & process inventions', emoji: '⚙️' },
+  { name: 'Copyright', desc: 'Protect source code & creative expressions', emoji: '©' },
+  { name: 'Trademark', desc: 'Protect brand identities & logos', emoji: '™' },
+  { name: 'Industrial Design', desc: 'Protect layout aesthetics & geometry', emoji: '🎨' },
+];
 
 const features = [
   {
     icon: AcademicCapIcon,
     title: 'Learning Hub',
     description: 'Comprehensive guides on Patents, Copyrights, Trademarks, and Industrial Designs with technical blueprints.',
-    color: 'from-primary-500 to-primary-600',
     link: '/learn',
     index: '01'
   },
   {
     icon: ClipboardDocumentListIcon,
     title: 'Quiz Module',
-    description: 'Test your IPR integrity with secure MCQ audits, track your scores, and verify past completions.',
-    color: 'from-secondary-500 to-secondary-600',
+    description: 'Test your IPR integrity with secure MCQ audits, track your scores, and verify completions.',
     link: '/quiz',
     index: '02'
   },
@@ -29,7 +35,6 @@ const features = [
     icon: FolderOpenIcon,
     title: 'Project Submission',
     description: 'Archive your engineering prototypes and get them catalogued with corresponding protection suggestions.',
-    color: 'from-primary-400 to-secondary-500',
     link: '/projects',
     index: '03'
   },
@@ -37,17 +42,9 @@ const features = [
     icon: LightBulbIcon,
     title: 'IPR Recommender',
     description: 'Feed in project specifications to instantly generate rule-based suggestions on which patent/copyright to pursue.',
-    color: 'from-secondary-600 to-primary-600',
     link: '/recommend',
     index: '04'
   }
-];
-
-const iprTypes = [
-  { name: 'Patent', desc: 'Protect structural & process inventions', emoji: '⚙️', color: 'border-primary-500/20 bg-primary-500/5' },
-  { name: 'Copyright', desc: 'Protect source code & creative expressions', emoji: '©', color: 'border-secondary-500/20 bg-secondary-500/5' },
-  { name: 'Trademark', desc: 'Protect brand identities & logos', emoji: '™', color: 'border-primary-400/20 bg-primary-400/5' },
-  { name: 'Industrial Design', desc: 'Protect layout aesthetics & product geometry', emoji: '🎨', color: 'border-secondary-400/20 bg-secondary-400/5' },
 ];
 
 const mockProjects = [
@@ -58,8 +55,6 @@ const mockProjects = [
     tags: ['Aeronautics', 'Robotics'],
     score: '98/100',
     status: 'PATENT PENDING',
-    statusColor: 'bg-primary-500/10 text-primary-300 border border-primary-500/20',
-    scoreColor: 'text-primary'
   },
   {
     title: 'NeuroLink Interface',
@@ -68,8 +63,6 @@ const mockProjects = [
     tags: ['Bio-Tech', 'Medical'],
     score: '62/100',
     status: 'IN REVIEW',
-    statusColor: 'bg-secondary-500/10 text-secondary-300 border border-secondary-500/20',
-    scoreColor: 'text-secondary'
   },
   {
     title: 'Quantum Guard Protocol',
@@ -78,231 +71,222 @@ const mockProjects = [
     tags: ['Security', 'Quantum'],
     score: '12/100',
     status: 'DRAFT',
-    statusColor: 'bg-white/5 text-slate-300 border border-white/10',
-    scoreColor: 'text-white'
   }
 ];
 
 const Home = () => {
   return (
-    <div className="min-h-screen relative overflow-x-hidden">
+    <FlowArt aria-label="EIPR Portal Overview">
       {/* Blueprint Corner Accents */}
       <div className="fixed top-2 left-2 blueprint-corner corner-tl z-[60]">+</div>
       <div className="fixed top-2 right-2 blueprint-corner corner-tr z-[60]">+</div>
       <div className="fixed bottom-2 left-2 blueprint-corner corner-bl z-[60]">+</div>
       <div className="fixed bottom-2 right-2 blueprint-corner corner-br z-[60]">+</div>
 
-      {/* Hero Section */}
-      <section className="relative pt-20 pb-28 px-4 max-w-7xl mx-auto grid md:grid-cols-12 gap-12 items-center">
-        {/* Background glow */}
-        <div className="absolute top-20 left-1/4 w-[600px] h-[400px] bg-primary-500/10 rounded-full blur-[120px] pointer-events-none animate-pulse-slow" />
-        <div className="absolute bottom-20 right-1/4 w-[600px] h-[400px] bg-secondary-500/5 rounded-full blur-[120px] pointer-events-none animate-pulse-slow" />
-
-        {/* Left: Text & Action */}
-        <div className="md:col-span-7 space-y-8 animate-fade-in relative z-10">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary-500/10 border border-primary-500/20 rounded-full text-primary-300 text-sm font-medium tracking-wide">
-            <ShieldCheckIcon className="h-4 w-4 text-primary" />
-            <span className="font-mono-sm text-xs tracking-widest uppercase">NODE VERIFIED // SYSTEM ACTIVE</span>
-          </div>
-
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.15]">
-            Protect Your <span className="text-gradient">Innovation.</span>
-            <br />
-            Secure Your IP Vault.
-          </h1>
-
-          <p className="text-lg text-slate-400 leading-relaxed max-w-xl">
-            Access decentralized learning paths, evaluate patent readiness, take academic IPR audits, 
-            and catalog your engineering projects within a secure academic vault.
-          </p>
-
-          <div className="flex flex-wrap items-center gap-4">
-            <Link to="/dashboard" className="btn-primary text-sm px-6 py-3 bg-primary-600 hover:bg-primary-500 rounded flex items-center gap-2 transition-all">
-              Enter Dashboard <ArrowRightIcon className="h-5 w-5" />
-            </Link>
-            <Link to="/learn" className="btn-outline text-sm px-6 py-3 border border-white/10 hover:border-primary-500/30 hover:bg-primary-500/5 text-slate-300 rounded transition-all">
-              Initialize Curriculum
-            </Link>
-          </div>
-
-          {/* Stats Grid */}
-          <div className="grid grid-cols-3 gap-6 pt-6 max-w-md">
-            {[
-              ['8+', 'IPR Guides', '01'],
-              ['20+', 'Audit Quizzes', '02'],
-              ['4', 'Core IP Protections', '03']
-            ].map(([num, label, idx]) => (
-              <div key={label} className="border-l border-primary-500/20 pl-4 space-y-1 relative">
-                <span className="absolute right-0 top-0 font-mono-sm text-[9px] text-primary-500/30">{idx}</span>
-                <div className="text-2xl font-bold text-gradient">{num}</div>
-                <div className="text-slate-500 font-mono-sm text-[11px] uppercase tracking-wider">{label}</div>
-              </div>
-            ))}
+      {/* Section 1: Hero */}
+      <FlowSection aria-label="Home Hero" style={{ backgroundColor: '#ff6b00', color: '#fff' }}>
+        <div className="flex justify-between items-center w-full">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] font-mono-sm text-white/90">01 — Protect Your Innovation</p>
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-black/25 border border-white/10 rounded-full text-white text-xs font-medium tracking-wide">
+            <ShieldCheckIcon className="h-3.5 w-3.5 text-white" />
+            <span className="font-mono-sm text-[10px] tracking-widest uppercase">SYS_ACTIVE // NODE_VERIFIED</span>
           </div>
         </div>
-
-        {/* Right: Security Vault Graphic */}
-        <div className="md:col-span-5 relative group">
-          <div className="absolute -inset-4 bg-gradient-to-tr from-primary-500/20 to-secondary-500/10 blur-2xl rounded-2xl opacity-50 group-hover:opacity-85 transition-opacity duration-700 pointer-events-none" />
-          
-          <div className="glass-card rounded-xl overflow-hidden shadow-2xl relative z-10 border border-white/10 scanline-container">
-            <div className="scanline-beam"></div>
-            {/* Corner symbols */}
-            <div className="absolute top-2 left-2 font-mono-sm text-[9px] text-primary/40">SYS_INIT_01</div>
-            <div className="absolute bottom-2 right-2 font-mono-sm text-[9px] text-secondary/40">IP_PROTOCOL_v4.2</div>
-            
-            <img
-              alt="Innovation Safe Vault"
-              className="w-full h-auto object-cover opacity-85 group-hover:scale-102 transition-transform duration-700 mix-blend-lighten"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1toP6VZbQN-dK-vZLPeSZCLmF5oxATtdfBx3Yo7XGnTBt0oT0G_hHeIdMol8iWiPHbrD__vSu4pm7NjapT9D_EnK7epsx1XXpg43eteJ5WPoCh1a7ojcr1BBQtsx4x8feSZO9yC6lFrvNnTQ9qedJqWNv7JPTayRfE_S1DRZRjqKgNjBtasrpoBULM6USPcSTSvoNa-avUgwqjdkvInV_J7kXGp7xksCUr7xSJaPdMJGaRnPxKzLvn1Ir-wG6fRaJWA8s5Kw75hDq"
-            />
+        <hr className="my-[1.5vw] border-none border-t border-white/20" />
+        <div className="grid lg:grid-cols-12 gap-8 items-center w-full">
+          <div className="lg:col-span-8">
+            <h1 className="text-[clamp(2.5rem,7.5vw,8.5rem)] font-extrabold leading-[0.85] uppercase tracking-tighter">
+              Protect
+              <br />
+              Your
+              <br />
+              Innovation
+            </h1>
           </div>
-        </div>
-      </section>
-
-      {/* 4 Types of Intellectual Property */}
-      <section className="px-4 py-20 max-w-7xl mx-auto border-t border-white/5">
-        <div className="max-w-xl mb-12">
-          <p className="font-mono-sm text-xs text-primary uppercase tracking-[0.2em] mb-2">Core Framework</p>
-          <h2 className="text-3xl font-bold text-white">4 Domains of Intellectual Property</h2>
-          <p className="text-slate-400 mt-2 text-sm">Critical pillars for engineering students to commercialize research.</p>
-        </div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
-          {iprTypes.map((type, idx) => (
-            <div 
-              key={type.name} 
-              className={`glass-card p-6 border ${type.color} group hover:shadow-primary-500/5 transition-all duration-300 animate-float`}
-              style={{ animationDelay: `${idx * 0.4}s` }}
-            >
-              <div className="absolute top-2 right-2 font-mono-sm text-[10px] text-white/10 uppercase">PROT_NODE</div>
-              <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">{type.emoji}</div>
-              <h3 className="text-lg font-bold text-white mb-1">{type.name}</h3>
-              <p className="text-slate-400 text-xs leading-relaxed">{type.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Features Bento Grid */}
-      <section className="px-4 py-20 max-w-7xl mx-auto border-t border-white/5">
-        <div className="max-w-xl mb-12">
-          <p className="font-mono-sm text-xs text-secondary uppercase tracking-[0.2em] mb-2">Active Modules</p>
-          <h2 className="text-3xl font-bold text-white">Comprehensive IP Protection Shield</h2>
-          <p className="text-slate-400 mt-2 text-sm">Engineered tools providing guidance for every development phase.</p>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-gutter">
-          {features.map((feature) => (
-            <div key={feature.title} className="glass-card p-6 flex flex-col justify-between h-72 group hover:shadow-secondary-500/5 transition-all duration-300">
-              <div className="flex justify-between items-start">
-                <div className="w-10 h-10 rounded bg-white/5 flex items-center justify-center border border-white/10 group-hover:scale-115 transition-transform duration-300">
-                  <feature.icon className="h-5 w-5 text-primary" />
-                </div>
-                <span className="font-mono-sm text-[10px] text-white/20">{feature.index}</span>
-              </div>
-              
-              <div className="space-y-2">
-                <h3 className="text-lg font-bold text-white">{feature.title}</h3>
-                <p className="text-slate-400 text-xs leading-relaxed">{feature.description}</p>
-              </div>
-
-              <Link to={feature.link} className="flex items-center gap-1 text-primary text-xs font-semibold hover:underline mt-4">
-                Initialize Module <ArrowRightIcon className="h-3 w-3" />
+          <div className="lg:col-span-4 space-y-6">
+            <p className="text-base sm:text-lg text-white/80 leading-relaxed font-sans">
+              Access decentralized learning paths, evaluate patent readiness, take academic IPR audits, and catalog your engineering projects within a secure academic vault.
+            </p>
+            <div className="flex flex-wrap items-center gap-4">
+              <Link to="/dashboard" className="px-6 py-3 bg-white text-[#ff6b00] font-bold rounded-lg hover:bg-white/90 transition-all duration-300 shadow-lg flex items-center gap-2 text-sm">
+                Enter Dashboard <ArrowRightIcon className="h-4 w-4" />
+              </Link>
+              <Link to="/learn" className="px-6 py-3 border border-white/30 hover:border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-all duration-300 text-sm">
+                Initialize Curriculum
               </Link>
             </div>
-          ))}
+          </div>
         </div>
-      </section>
-
-      {/* Active Project Mockup Section */}
-      <section className="px-4 py-20 max-w-7xl mx-auto border-t border-white/5">
-        <div className="max-w-xl mb-12">
-          <p className="font-mono-sm text-xs text-primary uppercase tracking-[0.2em] mb-2">Portfolio Previews</p>
-          <h2 className="text-3xl font-bold text-white">Active Vault Records</h2>
-          <p className="text-slate-400 mt-2 text-sm">Example student prototypes with active security evaluations.</p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-gutter">
-          {mockProjects.map((project, idx) => (
-            <div 
-              key={project.title} 
-              className="glass-card overflow-hidden group hover:shadow-primary-500/5 transition-all duration-500 animate-float"
-              style={{ animationDelay: `${idx * 0.6}s` }}
-            >
-              <div className="h-44 overflow-hidden relative scanline-container">
-                <div className="scanline-beam"></div>
-                <img
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  src={project.image}
-                />
-                <div className={`absolute top-3 right-3 px-2 py-0.5 rounded font-mono-sm text-[9px] uppercase tracking-wider ${project.statusColor}`}>
-                  {project.status}
-                </div>
-              </div>
-              
-              <div className="p-5 space-y-4">
-                <div className="flex justify-between items-start">
-                  <h4 className="font-bold text-white text-base">{project.title}</h4>
-                  <div className="text-right">
-                    <div className="text-[9px] font-mono-sm text-slate-500">PROTECT_INDEX</div>
-                    <div className={`font-mono-sm text-xs font-semibold ${project.scoreColor}`}>{project.score}</div>
-                  </div>
-                </div>
-
-                <p className="text-slate-400 text-xs leading-relaxed min-h-12">{project.desc}</p>
-                
-                <div className="flex gap-2">
-                  {project.tags.map((tag) => (
-                    <span key={tag} className="px-2 py-0.5 bg-white/5 rounded text-[10px] text-slate-500 font-mono-sm uppercase tracking-wider">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
+        <hr className="my-[1.5vw] border-none border-t border-white/20" />
+        <div className="grid grid-cols-3 gap-6 pt-4 max-w-lg">
+          {[
+            ['8+', 'IPR Guides', '01'],
+            ['20+', 'Audit Quizzes', '02'],
+            ['4', 'Core IP Protections', '03']
+          ].map(([num, label, idx]) => (
+            <div key={label} className="border-l-2 border-white/30 pl-4 space-y-1 relative">
+              <span className="absolute right-0 top-0 font-mono-sm text-[9px] text-white/40">{idx}</span>
+              <div className="text-2xl font-bold">{num}</div>
+              <div className="text-white/60 font-mono-sm text-[10px] uppercase tracking-wider">{label}</div>
             </div>
           ))}
         </div>
-      </section>
+      </FlowSection>
 
-      {/* Why IPR Matters */}
-      <section className="px-4 py-20 bg-gradient-to-b from-transparent to-surface-container-lowest/50 border-t border-white/5">
-        <div className="max-w-4xl mx-auto glass-panel p-8 md:p-12 relative overflow-hidden">
-          {/* Blueprint markings */}
-          <div className="absolute top-2 left-2 font-mono-sm text-[9px] text-primary/30">ALIGN_MARK_A</div>
-          <div className="absolute bottom-2 right-2 font-mono-sm text-[9px] text-secondary/30">REF_VAL_771</div>
-
-          <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-4">Why Engineers Need IPR Strategy</h2>
-          <p className="text-slate-400 text-center text-sm max-w-2xl mx-auto mb-12 leading-relaxed">
-            Every line of code you commit, every circuit schematic you compile, and every physical model 
-            you render represents key intellectual equity. A robust IP strategy enables:
-          </p>
-
-          <div className="grid sm:grid-cols-3 gap-8 text-left">
-            {[
-              ['Prevent Plagiarism', 'Secure first-to-file status and block unauthorized third-party replication.', '01'],
-              ['Monetize Research', 'Leverage patent portfolios to license technology, secure startup seed funding, or attract sponsorships.', '02'],
-              ['Industry Credibility', 'Differentiate yourself in engineering roles by demonstrating advanced regulatory and IP compliance.', '03']
-            ].map(([title, desc, idx]) => (
-              <div key={title} className="space-y-2 relative pl-2">
-                <span className="font-mono-sm text-[10px] text-primary absolute left-0 top-0 opacity-40">{idx}</span>
-                <div className="pl-6">
-                  <h4 className="font-bold text-white text-sm mb-1">{title}</h4>
-                  <p className="text-slate-400 text-xs leading-relaxed">{desc}</p>
+      {/* Section 2: Core Framework */}
+      <FlowSection aria-label="Core Framework" style={{ backgroundColor: '#08080a', color: '#fff' }}>
+        <p className="text-xs font-bold uppercase tracking-[0.2em] font-mono-sm text-[#ff6b00]">02 — Core Framework</p>
+        <hr className="my-[1.5vw] border-none border-t border-white/10" />
+        <div className="grid lg:grid-cols-12 gap-8 items-center w-full">
+          <div className="lg:col-span-6">
+            <h2 className="text-[clamp(2.5rem,7.5vw,8.5rem)] font-extrabold leading-[0.85] uppercase tracking-tighter text-white">
+              4 Core
+              <br />
+              Domains
+            </h2>
+          </div>
+          <div className="lg:col-span-6">
+            <div className="grid sm:grid-cols-2 gap-4">
+              {iprTypes.map((type) => (
+                <div key={type.name} className="p-5 border border-white/10 bg-white/[0.02] rounded-xl hover:border-[#ff6b00]/40 transition-all duration-300 relative group">
+                  <div className="absolute top-2 right-2 font-mono-sm text-[8px] text-white/20">PROT_NODE</div>
+                  <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">{type.emoji}</div>
+                  <h3 className="text-lg font-bold text-white mb-1">{type.name}</h3>
+                  <p className="text-slate-400 text-xs leading-relaxed">{type.desc}</p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </section>
+        <hr className="my-[1.5vw] border-none border-t border-white/10" />
+        <p className="max-w-[60ch] text-slate-400 text-sm">
+          Understanding the difference between patents, trademarks, copyrights, and industrial designs is crucial for secure commercialization.
+        </p>
+      </FlowSection>
 
-      {/* Footer */}
-      <footer className="border-t border-white/5 px-4 py-8 text-center text-slate-600 text-xs font-mono-sm tracking-widest uppercase">
-        © 2026 Innovation Vault Portal · SECURE NODE // MULTI-JURISDICTIONAL SYSTEM
-      </footer>
-    </div>
+      {/* Section 3: IP Shield */}
+      <FlowSection aria-label="Active Modules" style={{ backgroundColor: '#140e0a', color: '#fff' }}>
+        <p className="text-xs font-bold uppercase tracking-[0.2em] font-mono-sm text-[#ffb700]">03 — Active Modules</p>
+        <hr className="my-[1.5vw] border-none border-t border-white/10" />
+        <div className="grid lg:grid-cols-12 gap-8 items-center w-full">
+          <div className="lg:col-span-5">
+            <h2 className="text-[clamp(2.5rem,7.5vw,8.5rem)] font-extrabold leading-[0.85] uppercase tracking-tighter text-white">
+              IP
+              <br />
+              Shield
+            </h2>
+          </div>
+          <div className="lg:col-span-7">
+            <div className="grid sm:grid-cols-2 gap-4">
+              {features.map((feat) => (
+                <div key={feat.title} className="p-5 border border-white/10 bg-white/[0.02] rounded-xl flex flex-col justify-between h-48 hover:border-[#ffb700]/40 transition-all duration-300">
+                  <div className="flex justify-between items-start">
+                    <div className="w-8 h-8 rounded bg-white/5 flex items-center justify-center border border-white/10">
+                      <feat.icon className="h-4 w-4 text-[#ffb700]" />
+                    </div>
+                    <span className="font-mono-sm text-[9px] text-white/20">{feat.index}</span>
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold text-white mb-1">{feat.title}</h3>
+                    <p className="text-slate-400 text-[11px] leading-relaxed line-clamp-2">{feat.description}</p>
+                  </div>
+                  <Link to={feat.link} className="flex items-center gap-1 text-[#ffb700] text-xs font-semibold hover:underline mt-2">
+                    Initialize Module <ArrowRightIcon className="h-3 w-3" />
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <hr className="my-[1.5vw] border-none border-t border-white/10" />
+        <p className="max-w-[60ch] text-slate-400 text-sm">
+          Decentralized tools designed to provide custom legal, technical, and academic support throughout your product development cycle.
+        </p>
+      </FlowSection>
+
+      {/* Section 4: Vault Records */}
+      <FlowSection aria-label="Active Vault" style={{ backgroundColor: '#08080a', color: '#fff' }}>
+        <p className="text-xs font-bold uppercase tracking-[0.2em] font-mono-sm text-[#ff6b00]">04 — Vault Records</p>
+        <hr className="my-[1.5vw] border-none border-t border-white/10" />
+        <div className="grid lg:grid-cols-12 gap-8 items-center w-full">
+          <div className="lg:col-span-4">
+            <h2 className="text-[clamp(2.5rem,7.5vw,8.5rem)] font-extrabold leading-[0.85] uppercase tracking-tighter text-white">
+              Active
+              <br />
+              Vault
+            </h2>
+          </div>
+          <div className="lg:col-span-8">
+            <div className="grid md:grid-cols-3 gap-4">
+              {mockProjects.map((project) => (
+                <div key={project.title} className="border border-white/10 bg-white/[0.02] rounded-xl overflow-hidden group hover:border-[#ff6b00]/40 transition-all duration-300">
+                  <div className="h-28 overflow-hidden relative">
+                    <img
+                      alt={project.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      src={project.image}
+                    />
+                    <div className="absolute top-2 right-2 px-1.5 py-0.5 rounded font-mono-sm text-[8px] bg-black/60 text-white border border-white/10">
+                      {project.status}
+                    </div>
+                  </div>
+                  <div className="p-4 space-y-2">
+                    <h4 className="font-bold text-white text-sm truncate">{project.title}</h4>
+                    <p className="text-slate-400 text-[10px] leading-relaxed line-clamp-2 min-h-[2.5rem]">{project.desc}</p>
+                    <div className="flex gap-1.5 flex-wrap">
+                      {project.tags.slice(0, 2).map((tag) => (
+                        <span key={tag} className="px-1.5 py-0.5 bg-white/5 rounded text-[8px] text-slate-500 font-mono-sm uppercase">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <hr className="my-[1.5vw] border-none border-t border-white/10" />
+        <p className="max-w-[60ch] text-slate-400 text-sm">
+          Active secure ledger entries showing academic prototypes linked with real-time audit indices.
+        </p>
+      </FlowSection>
+
+      {/* Section 5: CTA */}
+      <FlowSection aria-label="Join Us" style={{ backgroundColor: '#ff6b00', color: '#fff' }}>
+        <p className="text-xs font-bold uppercase tracking-[0.2em] font-mono-sm text-white/90">05 — Join Us</p>
+        <hr className="my-[1.5vw] border-none border-t border-white/20" />
+        <div className="grid lg:grid-cols-12 gap-8 items-center w-full">
+          <div className="lg:col-span-8">
+            <h2 className="text-[clamp(2.5rem,7.5vw,8.5rem)] font-extrabold leading-[0.85] uppercase tracking-tighter text-white">
+              Ready
+              <br />
+              To
+              <br />
+              Begin?
+            </h2>
+          </div>
+          <div className="lg:col-span-4 space-y-6">
+            <p className="text-base sm:text-lg text-white/80 leading-relaxed font-sans">
+              Take control of your creative journey. Log in, request audit reviews, catalog your innovations, and explore prior art databases instantly.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link to="/wizard" className="px-6 py-3 bg-white text-[#ff6b00] font-bold rounded-lg hover:bg-white/90 transition-all duration-300 shadow-lg flex items-center gap-2 text-sm">
+                Run IP Wizard <ArrowRightIcon className="h-4 w-4" />
+              </Link>
+              <Link to="/dashboard" className="px-6 py-3 border border-white/30 hover:border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-all duration-300 text-sm">
+                Go to Dashboard
+              </Link>
+            </div>
+          </div>
+        </div>
+        <hr className="my-[1.5vw] border-none border-t border-white/20" />
+        <footer className="w-full flex justify-between items-center text-white/40 text-[9px] font-mono-sm tracking-widest uppercase">
+          <span>© 2026 Innovation Vault Portal</span>
+          <span>SECURE NODE // SYSTEM_ACTIVE</span>
+        </footer>
+      </FlowSection>
+    </FlowArt>
   );
 };
 
